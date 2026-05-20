@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-hr1$pgk*#@b+=x7_q23b3(ck)29o%3nn2hol$aoez4g9xqm(bk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -124,3 +125,6 @@ LOGOUT_REDIRECT_URL ='/produits/'
 
 MEDIA_URL ='/media/'
 MEDIA_ROOT =os.path.join(BASE_DIR,'media')
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICEFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
