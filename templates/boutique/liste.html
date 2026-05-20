@@ -1,0 +1,81 @@
+{% extends "boutique/base.html" %}
+{% block title %}Nos produits{% endblock  %}
+{% block content %}
+
+<div class="row mb-4">
+    <div class="col">
+        <h1 class="fw-bold">Nos Produits</h1>
+        <p class="text-muted">Découvrez notre sélection</p>
+    </div>
+</div>
+<!--barre de recherche-->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <form method="get">
+            <div class="input-group">
+                <input type="text"
+                name="q"
+                value="{% if query %}{{query}}{% endif %}"
+                class="form-control form-control-lg"
+                placeholder="Rechercher un produit....">
+                <button type="submit" class="btn btn-primary px-4">Recherche</button>
+                
+                {% if query %}
+                <a href="{% url 'boutique:liste' %}" class="btn btn-outline-secondary">Effacer</a>                    
+                {% endif %}
+                    
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--Résultat de recherche-->
+
+{% if query %}
+<p class="text-muted mb-3">
+    Résultats pour : <strong>{{query}}</strong>
+    -{{produits|length}}produit(s) trouvé(s)
+</p>    
+{% endif %}
+
+    
+
+{% if produits %}
+<div class="row row-cols-l row-cols-md-3 g-4">
+    {% for produit in produits  %}
+    <div class="col">
+        <div class="card h-100 p-3">
+            
+            {% if produit.image %}
+                <img src="{{produit.image.url}}"
+                class="card-img-top rounded-3"
+                style="height: 200px; object-fit: cover;" 
+                alt="{{produit.nom}}">
+            {% else %}
+            <div class="bg-secondary rounded-3 d-flex align-items justify-content-center"
+            stytle="height: 200px;">
+            <span style="font-size: 3em;"></span>
+            </div>    
+            {% endif %}
+                
+            <div class="card-body">
+                <h5 class="card-title fw-bold">{{produit.nom}}</h5>
+                <p class="card-text text-muted">{{produit.description}}</p>
+                <p class="prix">{{produit.prix}} Francs</p>
+                <p class="text-muted small">Stock : {{produit.stock}}</p>
+            </div>
+            <div class="card-footer bg-white border-0">
+                <a href="{% url 'boutique:detail' produit.pk %}" class="btn btn-primary w-100">
+                    Voir détails
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info">Aucun produit disponible</div>
+    
+{% endif %}
+    
+{% endblock  %}

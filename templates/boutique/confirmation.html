@@ -1,0 +1,66 @@
+{% extends "boutique/base.html" %}
+
+{% block title %}Commande confirmée{% endblock  %}
+
+{% block content %}
+
+<div class="row justfy-content-center">
+    <div class="col-md-8">
+        <div class="text-center mb-4">
+            <h1 style="font-size:  4em;"></h1>
+            <h2 class="fw-bold text-success">Commande passée avec succes</h2>
+            <p class="text-muted">Merci pour votre commande,{{commande.client_nom}}!</p>
+        </div>
+        <div class="card p-4 mb-4">
+            <h4 class="fw-bold mb-4">Récapitulatif de votre commande</h4>
+            <table class="table">
+                <tr>
+                    <td class="text-muted">Produit</td>
+                    <td class="fw-bold">{{commande.produit.nom}}</td>
+                </tr>
+                <tr>
+                    <td class="text-muted">Nom</td>
+                    <td>{{commande.client_nom}}</td>
+                </tr>
+                <tr>
+                    <td class="text-muted">Email</td>
+                    <td>{{commande.client_email}}</td>
+                </tr>
+                <tr>
+                    <td class="text-muted">Quantité</td>
+                    <td>{{comande.quantite}}</td>
+                </tr>
+                <tr>
+                    <td class="text-muted">Prix unitaire</td>
+                    <td>{{commande.produit.prix}} Francs</td>
+                </tr>
+                <tr class="table-success">
+                    <td class="fw-bold">Total</td>
+                    <td class="fw-bold text-">{{total}} Francs</td>
+                </tr>
+                <tr>
+                    <td class="text-muted">Statut</td>
+                    <td>
+                        <span class="badge bg-warnin text-dark">
+                            {{commande.get_statut_display}}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-muted">Date</td>
+                    <td>
+                        {{commande.date_commande|date:"d/m/Y á h:i"}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+        <div class="d-flex gap-3 justify-content-center">
+            <a href="{%url 'boutique:liste'%}" class="btn btn-primary px-4">
+                Continuer mes achats
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}

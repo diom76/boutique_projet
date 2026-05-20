@@ -1,0 +1,65 @@
+{% extends "boutique/base.html" %}
+{% block title %}Tableau de bord{% endblock  %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Tableau de Bord Admin</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white p-3 mb-3">
+                <h4>Produits</h4>
+                <h2>{{total_produits}}</h2>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white p-3 mb-3">
+                <h4>Commandes</h4>
+                <h2>{{total_commandes}}</h2>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-dark text-white p-3 mb-3">
+                <h4>Utilisateurs</h4>
+                <h2>{{total_utilisateurs}}</h2>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-dark p-3 mb-3">
+                <h4>Vents</h4>
+                <h2>{{total_ventes|floatformat:0}} FCFA</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-4 p-3">
+        <h4>Commandes Récentes</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Clients</th>
+                    <th>Total</th>
+                    <th>Statut</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for commande in  commandes_recentes %}
+                <tr>
+                    <td>
+                        
+                        {% if commande.utilisateur %}
+                              {{commande.utilisateur.username}}
+                        {% else %}
+                              {{commande.client_nom}}         
+                        {% endif %}
+                            
+                    </td>
+                    <td>{{commande.total}}FCFA</td>
+                    <td>{{commande.statut}}</td>
+                    <td>{{commande.date_commande}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock  %}

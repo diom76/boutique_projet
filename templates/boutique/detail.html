@@ -1,0 +1,56 @@
+{% extends "boutique/base.html" %}
+{% block title %}{{produit.nom}}{% endblock  %}
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="clo-md-8">
+        <div class="card p-4 mb-4">
+            <div class="card-body">
+                
+                {% if produit.image %}
+                    <img src="{{produit.image.url}}"
+                    class="img-luid rounded-3 mb-4"
+                    style="max-height: 350; object-fit: cover; width: 100%;"
+                     alt="{{produit.nom}}">
+                {% endif %}
+                    
+                <h1 class="fw-bold mb-3">{{produit.nom}}</h1>
+                <p class="text-muted f s-5">{{description}}</p>
+                <hr>
+                <p class="prix fs-3">{{produit.prix}} Francs</p>
+                <p>
+                    <span badge bg-success>Stock :{{produit.stock}}</span>
+                </p>
+                <p class="text-muted small">Ajouté le :{{produit.date_ajout|date:"d/m/Y"}}</p>
+            </div>
+        </div>
+        <div class="card p-4">
+            <h3 class="fw-bold mb-4">Passer une commande</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Votre nom</label>
+                    {{form.client_nom}}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Votre email</label>
+                    {{form.client_email}}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Quantité</label>
+                    {{form.quantite}}
+                </div>
+                <hr>
+                <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">
+                    Commander maintenant
+                </button>
+            </form>
+            <hr>
+        </div>
+        <div class="mt-3">
+            <a href="{% url 'boutique:liste' %}" class="btn btn-outline-secondary">Retour aux produits</a>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}
