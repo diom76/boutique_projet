@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-hr1$pgk*#@b+=x7_q23b3(ck)29o%3nn2hol$aoez4g9xqm(bk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['boutique-projet.onrender.com', 'localhost','127.0.0.1']
 
 
 # Application definition
@@ -128,3 +128,4 @@ MEDIA_ROOT =os.path.join(BASE_DIR,'media')
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICEFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+SECRET_KEY = os.environ.get('SECRET_KEY', SECRET_KEY)
