@@ -2,5 +2,5 @@ services:
 - type:web
   name: boutique-projet
   env: python
-  buildCommand: pip install -r requirements.txt && python manage.oy collectstatic --no-input && python manage.py migrate
-  startCommand: gunicorn boutique_projet.wsgi:application 
+  buildCommand: pip install -r requirements.txt && python manage.py collectstatic --no-input && python manage.py migrate
+  startCommand: gunicorn boutique_projet.wsgi:application --bind 0.0.0.0:$PORT
